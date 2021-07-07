@@ -2,6 +2,10 @@
 import Foundation
 import Alamofire
 
+public extension Notification.Name {
+    static let iWonAuthError = Notification.Name(rawValue: "iWonAuthError")
+}
+
 public final class NetworkMonitor {
     internal typealias AFResponse = AFDataResponse<Any>
     internal typealias Completion<Model, ErrorModel: Codable> = (Result<Model, NYError<ErrorModel>>) -> Void
@@ -49,9 +53,7 @@ private extension NetworkMonitor {
             }
             
             if statusCode == 401 {
-                //AppPreferencePane.shared.clear()
-                print("no auth")
-//                UserPreferences.shared.makeAuth() // TODO: Tmp auth
+                NotificationCenter.default.post(name: .iWonAuthError, object: nil)
             }
             
             if statusCode >= 400 {
