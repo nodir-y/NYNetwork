@@ -1,10 +1,7 @@
 
 import Foundation
 import Alamofire
-
-public extension Notification.Name {
-    static let iWonAuthError = Notification.Name(rawValue: "iWonAuthError")
-}
+import iWonPreferencePanes
 
 public final class NetworkMonitor {
     internal typealias AFResponse = AFDataResponse<Any>
