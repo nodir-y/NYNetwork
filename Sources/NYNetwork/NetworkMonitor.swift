@@ -1,7 +1,6 @@
 
 import Foundation
 import Alamofire
-import iWonPreferencePanes
 
 public final class NetworkMonitor {
     internal typealias AFResponse = AFDataResponse<Any>
@@ -49,13 +48,13 @@ private extension NetworkMonitor {
                 onEmptySuccessResult?()
             }
             
+            LogManager.log(statusCode: statusCode, monitor.response, kind)
+            
             if statusCode == 401 {
-                NotificationCenter.default.post(name: .iWonAuthError, object: nil)
+                return internalError(from: monitor.decryptedData, kind: kind, errorKind: errorKind, statusCode: 401, completion: completion)
             }
             
             if statusCode >= 400 {
-                LogManager.log(statusCode: statusCode, monitor.response, kind)
-                
                 if statusCode <= 422 {
                     return internalError(from: monitor.decryptedData, kind: kind, errorKind: errorKind, statusCode: statusCode, completion: completion)
                 } else {                    
