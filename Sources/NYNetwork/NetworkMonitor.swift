@@ -76,7 +76,7 @@ private extension NetworkMonitor {
         let decodableModel: Model
         do {
             // Output log
-            LogManager.log(statusCode: monitor.statusCode!, monitor.response, kind)
+//            LogManager.log(statusCode: monitor.statusCode!, monitor.response, kind)
             
             // Check if response data is nil
             guard monitor.decryptedData != nil else {
@@ -129,7 +129,6 @@ fileprivate extension NetworkMonitor {
         do {
             let error: ErrorModel = try NetworkHelper.decode(from: data)
             let appError: NYError<ErrorModel> = .standard(statusCode: 500, model: error)
-//            NetworkMonitor.errorRecorder?(appError)
             completion(.failure(appError))
         } catch {
             completion(.failure(.unexpected(description: error.localizedDescription, data: data)))
@@ -140,7 +139,6 @@ fileprivate extension NetworkMonitor {
         do {
             let errorModel: ErrorModel = try NetworkHelper.decode(from: data)
             let appError: NYError<ErrorModel> = .standard(statusCode: statusCode, model: errorModel)
-//            NetworkMonitor.errorRecorder?(appError)
             completion(.failure(appError))
         } catch {
             completion(.failure(.unexpected(description: error.localizedDescription, data: data)))
