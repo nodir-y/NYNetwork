@@ -3,11 +3,11 @@ import Foundation
 import Alamofire
 
 public final class NetworkMonitor {
-    internal typealias AFResponse = AFDataResponse<Any>
-    internal typealias Completion<Model, ErrorModel: Codable> = (Result<Model, NYError<ErrorModel>>) -> Void
-    internal typealias Finish<Model, ErrorModel: Codable> = Result<Model, NYError<ErrorModel>>
-    internal typealias ClassFinish<Model, ErrorModel: Codable> = Result<[Model], NYError<ErrorModel>>
-    internal typealias Kind<Model> = Model.Type
+    public typealias AFResponse = AFDataResponse<Any>
+    public typealias Completion<Model, ErrorModel: Codable> = (Result<Model, NYError<ErrorModel>>) -> Void
+    public typealias Finish<Model, ErrorModel: Codable> = Result<Model, NYError<ErrorModel>>
+    public typealias ClassFinish<Model, ErrorModel: Codable> = Result<[Model], NYError<ErrorModel>>
+    public typealias Kind<Model> = Model.Type
     
     public init() {}
     
@@ -22,7 +22,7 @@ public final class NetworkMonitor {
      - kind: The decodable object type
      - completion: The callback called after monitor finish
      */
-    internal func monitor<Model: Codable, ErrorModel: Codable>(_ response: AFResponse,
+    public func monitor<Model: Codable, ErrorModel: Codable>(_ response: AFResponse,
                                           kind: Kind<Model>,
                                           errorKind: Kind<ErrorModel>,
                                           completion: @escaping Completion<Model, ErrorModel>,
