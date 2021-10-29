@@ -7,7 +7,7 @@ swift_library(
         "Sources/NYNetwork/**/*.swift",
     ]),
     deps = [
-        "//third-party/iWon/third-party/Alamofire:Alamofire",
+        "Alamofire:Alamofire",
     ],
     visibility = [
         "//visibility:public",
