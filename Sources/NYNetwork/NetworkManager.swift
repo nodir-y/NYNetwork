@@ -11,7 +11,9 @@ public class NetworkManager: NSObject {
     
     public func makeRequest<Model: Codable, ErrorModel: Codable>(url: String, params: [String: Any] = [:], headers: HTTPHeaders = [], method: HTTPMethod = .get, completion: @escaping CompletionArray<Model, ErrorModel>) {
         
-        let request = AF.request(url, method: method, parameters: params, headers: headers)
+        let encoding = method == .get ? URLEncoding.default : URLEncoding.httpBody
+        
+        let request = AF.request(url, method: method, parameters: params, encoding: encoding, headers: headers)
         
         let start = CFAbsoluteTimeGetCurrent()
         request.responseJSON { (response) in
@@ -30,7 +32,9 @@ public class NetworkManager: NSObject {
     
     public func makeRequest<Model: Codable, ErrorModel: Codable>(url: String, params: [String: Any] = [:], headers: HTTPHeaders = [], method: HTTPMethod = .get, completion: @escaping Completion<Model, ErrorModel>) {
         
-        let request = AF.request(url, method: method, parameters: params, headers: headers)
+        let encoding = method == .get ? URLEncoding.default : URLEncoding.httpBody
+        
+        let request = AF.request(url, method: method, parameters: params, encoding: encoding, headers: headers)
         
         let start = CFAbsoluteTimeGetCurrent()
         request.responseJSON { (response) in
